@@ -202,7 +202,16 @@ namespace GeoQuery
         }
         internal static Neighbour Neighbours(string geohash)
         {
+            string n = Adjacent(geohash, Direction.North);
+            string ne = Adjacent(Adjacent(geohash, Direction.North),Direction.East);
+            string e = Adjacent(geohash, Direction.East);
+            string se = Adjacent(Adjacent(geohash, Direction.South), Direction.East);
+            string s = Adjacent(geohash, Direction.South);
+            string sw = Adjacent(Adjacent(geohash, Direction.South), Direction.West);
+            string w = Adjacent(geohash, Direction.West);
+            string nw = Adjacent(Adjacent(geohash, Direction.North), Direction.West);
 
+            return new Neighbour(n, s, e, w, ne, se, nw, sw);
         }
 
     }
@@ -245,6 +254,17 @@ namespace GeoQuery
         public string NorthWest { get; }
         public string SouthWest { get; }
 
+        public Neighbour(string n,string s,string e,string w,string ne,string se,string nw,string sw)
+        {
+            North = n;
+            South = s;
+            East = e;
+            West = w;
+            NorthEast = ne;
+            SouthEast = se;
+            NorthWest = nw;
+            SouthWest = sw;
+        }
 
 
     }

@@ -12,6 +12,7 @@ namespace GeoQuery
             var n4 = GeoQuery.Adjacent(s, Direction.East);
             var n2 = GeoQuery.Adjacent(s, Direction.South);
             var n3 = GeoQuery.Adjacent(s, Direction.West);
+            var ss= GeoQuery.Neighbours(s);
 
         }
     }
