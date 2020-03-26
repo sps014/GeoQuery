@@ -71,10 +71,71 @@ namespace GeoQuery
         {
             return Encode(point.Latitude, point.Longitude, precision);
         }
+        internal static GeoPoint Decode(string geohash)
+        {
+            Bound bounds = Bounds(geohash); // <-- the hard work
+                                                    // now just determine the centre of the cell...
+
+            double latMin = bounds.SW.Latitude, lonMin = bounds.SW.Longitude;
+            double latMax = bounds.NE.Latitude, lonMax = bounds.NE.Longitude;
+
+            // cell centre
+            double lat = (latMin + latMax) / 2;
+            double lon = (lonMin + lonMax) / 2;
+
+            // round to close to centre without excessive precision: ⌊2-log10(Δ°)⌋ decimal places
+            lat = lat.toFixed(Math.Floor(2 - Math.Log10(latMax - latMin)));
+            lon = lon.toFixed(Math.Floor(2 - Math.Log10(lonMax - lonMin)));
+
+            return new GeoPoint(lat, lon);
+        }
         internal static Bound Bounds(string geohash)
         {
             geohash = geohash.ToLower();
+            bool evenBit = true;
+            double latMin = -90, latMax = 90;
+            double lonMin = -180, lonMax = 180;
 
+            for (int i = 0; i < geohash.Length; i++)
+            {
+                char chr = geohash[i];
+                int idx = base32.IndexOf(chr);
+                if (idx == -1) throw new Exception("Invalid geohash");
+
+                for (int n = 4; n >= 0; n--)
+                {
+                    var bitN = idx >> n & 1;
+                    if (evenBit)
+                    {
+                        // longitude
+                        double lonMid = (lonMin + lonMax) / 2;
+                        if (bitN == 1)
+                        {
+                            lonMin = lonMid;
+                        }
+                        else
+                        {
+                            lonMax = lonMid;
+                        }
+                    }
+                    else
+                    {
+                        // latitude
+                        double latMid = (latMin + latMax) / 2;
+                        if (bitN == 1)
+                        {
+                            latMin = latMid;
+                        }
+                        else
+                        {
+                            latMax = latMid;
+                        }
+                    }
+                    evenBit = !evenBit;
+                }
+            }
+
+            return new Bound(new GeoPoint(latMin,lonMin),new GeoPoint(latMax,lonMax));
         }
     }
 
