@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GeoQuery.android.cs" />
+    <Compile Remove="GeoQuery.shared.cs" />
+    <Compile Remove="GeoQuery.uwp.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="GeoQuery.android.cs" />
+    <None Include="GeoQuery.shared.cs" />
+    <None Include="GeoQuery.uwp.cs" />
+  </ItemGroup>
+
+</Project>
