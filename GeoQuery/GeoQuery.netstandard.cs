@@ -1,6 +1,7 @@
 ﻿///https://github.com/chrisveness/latlon-geohash/blob/master/latlon-geohash.js
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace GeoQuery
@@ -84,8 +85,11 @@ namespace GeoQuery
             double lon = (lonMin + lonMax) / 2;
 
             // round to close to centre without excessive precision: ⌊2-log10(Δ°)⌋ decimal places
-            lat = lat.toFixed(Math.Floor(2 - Math.Log10(latMax - latMin)));
-            lon = lon.toFixed(Math.Floor(2 - Math.Log10(lonMax - lonMin)));
+            int precLat= (int) Math.Floor(2 - Math.Log((latMax - latMin)/ 2.302585092994046));
+            int precLong = (int)Math.Floor(2 - Math.Log((lonMax - lonMin)/ 2.302585092994046));
+
+            lat = double.Parse(lat.ToString($"F{precLat}", CultureInfo.InvariantCulture));
+            lon= double.Parse(lon.ToString($"F{precLong}", CultureInfo.InvariantCulture));
 
             return new GeoPoint(lat, lon);
         }
