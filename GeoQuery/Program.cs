@@ -6,7 +6,7 @@ namespace GeoQuery
     {
         static void Main(string[] args)
         {
-            var s = GeoQuery.Encode(new GeoPoint(125.676,18.8),12);
+            var s = GeoQuery.Encode(26.83710, 80.92060, 6);
             var d = GeoQuery.Decode(s);
         }
     }
