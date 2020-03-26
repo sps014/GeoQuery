@@ -9,7 +9,7 @@ namespace GeoQuery
     public partial class GeoHash
     {
 
-        private const string  base32 = "0123456789bcdefghjkmnpqrstuvwxyz"; // (geohash-specific) Base32 map
+        private const string base32 = "0123456789bcdefghjkmnpqrstuvwxyz"; // (geohash-specific) Base32 map
 
         /// <summary>
         /// Encode given latitude and longitude to corresponding GeoHash
@@ -18,7 +18,7 @@ namespace GeoQuery
         /// <param name="lon">longitude of the Location</param>
         /// <param name="precision">Number of characters in resulting geohash </param>
         /// <returns>corresponding geohash</returns>
-        public static string Encode(double lat,double lon,int precision)
+        public static string Encode(double lat, double lon, int precision)
         {
 
 
@@ -81,7 +81,7 @@ namespace GeoQuery
         /// <param name="point">Geo Point location </param>
         /// <param name="precision">Number of characters in resulting geohash</param>
         /// <returns>corresponding geohash</returns>
-        public static string Encode(GeoPoint point,int precision)
+        public static string Encode(GeoPoint point, int precision)
         {
             return Encode(point.Latitude, point.Longitude, precision);
         }
@@ -93,7 +93,7 @@ namespace GeoQuery
         public static GeoPoint Decode(string geohash)
         {
             Bound bounds = Bounds(geohash); // <-- the hard work
-                                                    // now just determine the centre of the cell...
+                                            // now just determine the centre of the cell...
 
             double latMin = bounds.SW.Latitude, lonMin = bounds.SW.Longitude;
             double latMax = bounds.NE.Latitude, lonMax = bounds.NE.Longitude;
@@ -103,11 +103,11 @@ namespace GeoQuery
             double lon = (lonMin + lonMax) / 2;
 
             // round to close to centre without excessive precision: ⌊2-log10(Δ°)⌋ decimal places
-            int precLat= (int) Math.Floor(2 - Math.Log((latMax - latMin)/ 2.302585092994046));
-            int precLong = (int)Math.Floor(2 - Math.Log((lonMax - lonMin)/ 2.302585092994046));
+            int precLat = (int)Math.Floor(2 - Math.Log((latMax - latMin) / 2.302585092994046));
+            int precLong = (int)Math.Floor(2 - Math.Log((lonMax - lonMin) / 2.302585092994046));
 
             lat = double.Parse(lat.ToString($"F{precLat}", CultureInfo.InvariantCulture));
-            lon= double.Parse(lon.ToString($"F{precLong}", CultureInfo.InvariantCulture));
+            lon = double.Parse(lon.ToString($"F{precLong}", CultureInfo.InvariantCulture));
 
             return new GeoPoint(lat, lon);
         }
@@ -162,7 +162,7 @@ namespace GeoQuery
                 }
             }
 
-            return new Bound(new GeoPoint(latMin,lonMin),new GeoPoint(latMax,lonMax));
+            return new Bound(new GeoPoint(latMin, lonMin), new GeoPoint(latMax, lonMax));
         }
         /// <summary>
         /// Get the adjacent geohash 
@@ -170,7 +170,7 @@ namespace GeoQuery
         /// <param name="geohash">main geohash</param>
         /// <param name="direction">direction of geohash</param>
         /// <returns>geohash of Neighbouring cell</returns>
-        public static string Adjacent(string geohash,Direction direction)
+        public static string Adjacent(string geohash, Direction direction)
         {
             geohash = geohash.ToLower();
 
@@ -199,7 +199,7 @@ namespace GeoQuery
             Dictionary<Direction, string[]> border = new Dictionary<Direction, string[]>()
             {
                 {
-                    Direction.North , new string[]{ "prxz","bcfguvyz" } 
+                    Direction.North , new string[]{ "prxz","bcfguvyz" }
                 },
                 {
                     Direction.South,new string[]{ "028b","0145hjnp" }
@@ -213,13 +213,13 @@ namespace GeoQuery
                 }
             };
 
-            char lastCh = geohash[geohash.Length-1];    // last character of hash
-            string parent = geohash.Substring(0,geohash.Length-1); // hash without last character
+            char lastCh = geohash[geohash.Length - 1];    // last character of hash
+            string parent = geohash.Substring(0, geohash.Length - 1); // hash without last character
 
             int type = geohash.Length % 2;
 
             // check for edge-cases which don't share common prefix
-            if (border[direction][type].IndexOf(lastCh) != -1 && parent !="")
+            if (border[direction][type].IndexOf(lastCh) != -1 && parent != "")
             {
                 parent = Adjacent(parent, direction);
             }
@@ -237,7 +237,7 @@ namespace GeoQuery
         public static Neighbour Neighbours(string geohash)
         {
             string n = Adjacent(geohash, Direction.North);
-            string ne = Adjacent(Adjacent(geohash, Direction.North),Direction.East);
+            string ne = Adjacent(Adjacent(geohash, Direction.North), Direction.East);
             string e = Adjacent(geohash, Direction.East);
             string se = Adjacent(Adjacent(geohash, Direction.South), Direction.East);
             string s = Adjacent(geohash, Direction.South);
@@ -248,38 +248,24 @@ namespace GeoQuery
             return new Neighbour(n, s, e, w, ne, se, nw, sw);
         }
 
-        public static CellSize CellDimension(int precision)
+        /// <summary>
+        /// Get hash table containg the cell-sizes with precision as key from 1-12
+        /// </summary>
+        public static readonly Dictionary<int, CellSize> BoxSizeTable = new Dictionary<int, CellSize>()
         {
-            switch(precision)
-            {
-                case 1:
-                    return new CellSize(5000000, 5000000);
-                case 2:
-                    return new CellSize(1250000, 625000);
-                case 3:
-                    return new CellSize(156000, 156000);
-                case 4:
-                    return new CellSize(39100, 19500);
-                case 5:
-                    return new CellSize(4890, 4890);
-                case 6:
-                    return new CellSize(1220, 610);
-                case 7:
-                    return new CellSize(153, 153);
-                case 8:
-                    return new CellSize(38.2, 19.1);
-                case 9:
-                    return new CellSize(4.77, 4.77);
-                case 10:
-                    return new CellSize(1.19, 0.596);
-                case 11:
-                    return new CellSize(0.149, 0.149);
-                case 12:
-                    return new CellSize(0.0372, 0.0186);
-                default:
-                    return new CellSize();
-            }
-        }
+                   { 1, new CellSize(5000000, 5000000) },
+                   { 2, new CellSize(1250000, 625000)},
+                   { 3, new CellSize(156000, 156000)},
+                   { 4, new CellSize(39100, 19500)},
+                   { 5, new CellSize(39100, 19500)},
+                   { 6, new CellSize(1220, 610)},
+                   { 7, new CellSize(153, 153)},
+                   { 8, new CellSize(38.2, 19.1)},
+                   { 9, new CellSize(4.77, 4.77)},
+                   { 10,new CellSize(1.19, 0.596)},
+                   { 11, new CellSize(0.149, 0.149)},
+                   { 12,  new CellSize(0.0372, 0.0186)}
+    };
 
     }
 
