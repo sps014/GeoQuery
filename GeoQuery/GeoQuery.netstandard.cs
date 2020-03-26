@@ -141,6 +141,50 @@ namespace GeoQuery
 
             return new Bound(new GeoPoint(latMin,lonMin),new GeoPoint(latMax,lonMax));
         }
+        internal static string Adjacent(string geohash,Direction direction)
+        {
+            geohash = geohash.ToLower();
+
+            if (geohash.Length == 0) throw new Exception("Invalid geohash");
+
+            Dictionary<Direction, string[]> neighbour = new Dictionary<Direction, string[]>()
+            {
+                {
+                    Direction.North , new string[] { "p0r21436x8zb9dcf5h7kjnmqesgutwvy",
+                                                   "bc01fg45238967deuvhjyznpkmstqrwx" }
+                },
+                {
+                    Direction.South,new string[]{  "14365h7k9dcfesgujnmqp0r2twvyx8zb",
+                                                    "238967debc01fg45kmstqrwxuvhjyznp" }
+                }
+                ,
+                {
+                     Direction.East,new string[]{ "bc01fg45238967deuvhjyznpkmstqrwx",
+                                                   "p0r21436x8zb9dcf5h7kjnmqesgutwvy" }
+                },
+                {
+                     Direction.West,new string[]{ "238967debc01fg45kmstqrwxuvhjyznp",
+                                                   "14365h7k9dcfesgujnmqp0r2twvyx8zb" }
+                }
+            };
+            Dictionary<Direction, string[]> border = new Dictionary<Direction, string[]>()
+            {
+                {
+                    Direction.North , new string[]{ "prxz","bcfguvyz'" }
+                },
+                {
+                    Direction.South,new string[]{ "028b","0145hjnp" }
+                }
+                ,
+                {
+                     Direction.East,new string[]{ "bcfguvyz","prxz" }
+                },
+                {
+                     Direction.West,new string[]{ "0145hjnp","028b" }
+                }
+            };
+        }
+
     }
 
     public struct GeoPoint
@@ -162,5 +206,12 @@ namespace GeoQuery
             SW = sw;
             NE = ne;
         }
+    }
+    public enum Direction
+    {
+        East= 'e',
+        West= 'w',
+        North= 'n',
+        South= 's'
     }
 }
