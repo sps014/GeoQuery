@@ -200,6 +200,10 @@ namespace GeoQuery
 
 
         }
+        internal static Neighbour Neighbours(string geohash)
+        {
+
+        }
 
     }
 
@@ -229,5 +233,19 @@ namespace GeoQuery
         West= 'w',
         North= 'n',
         South= 's'
+    }
+    public struct Neighbour
+    {
+        public string North { get;}
+        public string South { get; }
+        public string East { get; }
+        public string West { get; }
+        public string NorthEast { get; }
+        public string SouthEast { get; }
+        public string NorthWest { get; }
+        public string SouthWest { get; }
+
+
+
     }
 }
