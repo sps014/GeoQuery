@@ -8,6 +8,11 @@ namespace GeoQuery
         {
             var s = GeoQuery.Encode(26.83710, 80.92060, 6);
             var d = GeoQuery.Decode(s);
+            var n1 = GeoQuery.Adjacent(s,Direction.North);
+            var n4 = GeoQuery.Adjacent(s, Direction.East);
+            var n2 = GeoQuery.Adjacent(s, Direction.South);
+            var n3 = GeoQuery.Adjacent(s, Direction.West);
+
         }
     }
 }

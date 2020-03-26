@@ -170,7 +170,7 @@ namespace GeoQuery
             Dictionary<Direction, string[]> border = new Dictionary<Direction, string[]>()
             {
                 {
-                    Direction.North , new string[]{ "prxz","bcfguvyz'" }
+                    Direction.North , new string[]{ "prxz","bcfguvyz" } 
                 },
                 {
                     Direction.South,new string[]{ "028b","0145hjnp" }
@@ -183,6 +183,22 @@ namespace GeoQuery
                      Direction.West,new string[]{ "0145hjnp","028b" }
                 }
             };
+
+            char lastCh = geohash[geohash.Length-1];    // last character of hash
+            string parent = geohash.Substring(0,geohash.Length-1); // hash without last character
+
+            int type = geohash.Length % 2;
+
+            // check for edge-cases which don't share common prefix
+            if (border[direction][type].IndexOf(lastCh) != -1 && parent !="")
+            {
+                parent = Adjacent(parent, direction);
+            }
+
+            // append letter for direction to parent
+            return parent + base32[(neighbour[direction][type].IndexOf(lastCh))];
+
+
         }
 
     }
