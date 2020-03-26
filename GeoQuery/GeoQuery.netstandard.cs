@@ -214,6 +214,50 @@ namespace GeoQuery
             return new Neighbour(n, s, e, w, ne, se, nw, sw);
         }
 
+        internal static CellSize CellDimension(int precision)
+        {
+            switch(precision)
+            {
+                case 1:
+                    return new CellSize(5000000, 5000000);
+                case 2:
+                    return new CellSize(1250000, 625000);
+                case 3:
+                    return new CellSize(156000, 156000);
+                case 4:
+                    return new CellSize(39100, 19500);
+                case 5:
+                    return new CellSize(4890, 4890);
+                case 6:
+                    return new CellSize(1220, 610);
+                case 7:
+                    return new CellSize(153, 153);
+                case 8:
+                    return new CellSize(38.2, 19.1);
+                case 9:
+                    return new CellSize(4.77, 4.77);
+                case 10:
+                    return new CellSize(1.19, 0.596);
+                case 11:
+                    return new CellSize(0.149, 0.149);
+                case 12:
+                    return new CellSize(0.0372, 0.0186);
+                default:
+                    return new CellSize();
+            }
+        }
+
+    }
+
+    public struct CellSize
+    {
+        public double Width { get; }
+        public double Height { get; }
+        public CellSize(double w,double h)
+        {
+            Width = w;
+            Height = h;
+        }
     }
 
     public struct GeoPoint
