@@ -75,10 +75,21 @@ namespace GeoQuery
 
             return geohash;
         }
+        /// <summary>
+        /// Encode given latitude and longitude to corresponding GeoHash
+        /// </summary>
+        /// <param name="point">Geo Point location </param>
+        /// <param name="precision">Number of characters in resulting geohash</param>
+        /// <returns>corresponding geohash</returns>
         public static string Encode(GeoPoint point,int precision)
         {
             return Encode(point.Latitude, point.Longitude, precision);
         }
+        /// <summary>
+        /// Get Corresponding Approximated Latitude and Longitude
+        /// </summary>
+        /// <param name="geohash">geohash of location</param>
+        /// <returns>A GeoPoint (Corresponding Lat,Long)</returns>
         public static GeoPoint Decode(string geohash)
         {
             Bound bounds = Bounds(geohash); // <-- the hard work
