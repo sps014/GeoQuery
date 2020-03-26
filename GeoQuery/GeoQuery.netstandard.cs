@@ -1,4 +1,4 @@
-﻿///https://github.com/chrisveness/latlon-geohash/blob/master/latlon-geohash.js
+﻿///port of https://github.com/chrisveness/latlon-geohash/blob/master/latlon-geohash.js
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -111,6 +111,11 @@ namespace GeoQuery
 
             return new GeoPoint(lat, lon);
         }
+        /// <summary>
+        /// Get the bound of the given geohash
+        /// </summary>
+        /// <param name="geohash">hash of location</param>
+        /// <returns>SW,NE location</returns>
         public static Bound Bounds(string geohash)
         {
             geohash = geohash.ToLower();
@@ -159,6 +164,12 @@ namespace GeoQuery
 
             return new Bound(new GeoPoint(latMin,lonMin),new GeoPoint(latMax,lonMax));
         }
+        /// <summary>
+        /// Get the adjacent geohash 
+        /// </summary>
+        /// <param name="geohash">main geohash</param>
+        /// <param name="direction">direction of geohash</param>
+        /// <returns>geohash of Neighbouring cell</returns>
         public static string Adjacent(string geohash,Direction direction)
         {
             geohash = geohash.ToLower();
@@ -218,6 +229,11 @@ namespace GeoQuery
 
 
         }
+        /// <summary>
+        /// Get all the neighbouring Geohashes [All 8]
+        /// </summary>
+        /// <param name="geohash">Current Geohash</param>
+        /// <returns>Neigbour Object</returns>
         public static Neighbour Neighbours(string geohash)
         {
             string n = Adjacent(geohash, Direction.North);
