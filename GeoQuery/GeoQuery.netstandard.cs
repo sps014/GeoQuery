@@ -6,12 +6,19 @@ using System.Text;
 
 namespace GeoQuery
 {
-    public partial class GeoQuery
+    public partial class GeoHash
     {
 
-        const string  base32 = "0123456789bcdefghjkmnpqrstuvwxyz"; // (geohash-specific) Base32 map
+        private const string  base32 = "0123456789bcdefghjkmnpqrstuvwxyz"; // (geohash-specific) Base32 map
 
-        internal static string Encode(double lat,double lon,int precision)
+        /// <summary>
+        /// Encode given latitude and longitude to corresponding GeoHash
+        /// </summary>
+        /// <param name="lat">latitude of the Location</param>
+        /// <param name="lon">longitude of the Location</param>
+        /// <param name="precision">Number of characters in resulting geohash </param>
+        /// <returns>corresponding geohash</returns>
+        public static string Encode(double lat,double lon,int precision)
         {
 
 
@@ -68,11 +75,11 @@ namespace GeoQuery
 
             return geohash;
         }
-        internal static string Encode(GeoPoint point,int precision)
+        public static string Encode(GeoPoint point,int precision)
         {
             return Encode(point.Latitude, point.Longitude, precision);
         }
-        internal static GeoPoint Decode(string geohash)
+        public static GeoPoint Decode(string geohash)
         {
             Bound bounds = Bounds(geohash); // <-- the hard work
                                                     // now just determine the centre of the cell...
@@ -93,7 +100,7 @@ namespace GeoQuery
 
             return new GeoPoint(lat, lon);
         }
-        internal static Bound Bounds(string geohash)
+        public static Bound Bounds(string geohash)
         {
             geohash = geohash.ToLower();
             bool evenBit = true;
@@ -141,7 +148,7 @@ namespace GeoQuery
 
             return new Bound(new GeoPoint(latMin,lonMin),new GeoPoint(latMax,lonMax));
         }
-        internal static string Adjacent(string geohash,Direction direction)
+        public static string Adjacent(string geohash,Direction direction)
         {
             geohash = geohash.ToLower();
 
@@ -200,7 +207,7 @@ namespace GeoQuery
 
 
         }
-        internal static Neighbour Neighbours(string geohash)
+        public static Neighbour Neighbours(string geohash)
         {
             string n = Adjacent(geohash, Direction.North);
             string ne = Adjacent(Adjacent(geohash, Direction.North),Direction.East);
@@ -214,7 +221,7 @@ namespace GeoQuery
             return new Neighbour(n, s, e, w, ne, se, nw, sw);
         }
 
-        internal static CellSize CellDimension(int precision)
+        public static CellSize CellDimension(int precision)
         {
             switch(precision)
             {

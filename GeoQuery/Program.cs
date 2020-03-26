@@ -1,20 +1,21 @@
 ﻿using System;
+using  GeoQuery;
 
-namespace GeoQuery
+namespace GC
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var s = GeoQuery.Encode(26.83710, 80.92060, 6);
-            var sp = GeoQuery.Encode(new GeoPoint(26.83710, 80.92060), 6);
+            var s = GeoHash.Encode(26.83710, 80.92060, 6);
+            var sp = GeoHash.Encode(new GeoPoint(26.83710, 80.92060), 6);
 
-            var d = GeoQuery.Decode(s);
-            var n1 = GeoQuery.Adjacent(s,Direction.North);
-            var n4 = GeoQuery.Adjacent(s, Direction.East);
-            var n2 = GeoQuery.Adjacent(s, Direction.South);
-            var n3 = GeoQuery.Adjacent(s, Direction.West);
-            var ss= GeoQuery.Neighbours(s);
+            var d = GeoHash.Decode(s);
+            var n1 = GeoHash.Adjacent(s,Direction.North);
+            var n4 = GeoHash.Adjacent(s, Direction.East);
+            var n2 = GeoHash.Adjacent(s, Direction.South);
+            var n3 = GeoHash.Adjacent(s, Direction.West);
+            var ss= GeoHash.Neighbours(s);
 
         }
     }
