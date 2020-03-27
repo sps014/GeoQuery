@@ -32,5 +32,5 @@ The algorithm is based on [Gustavo Niemeyer’s geocoding system](https://en.wik
             and so on
 ```
 
-###### Thanks to [@chrisveness](https://github.com/chrisveness/)
+###### Thanks to [@chrisveness](https://github.com/chrisveness/) port of js-lat-long lib
 
