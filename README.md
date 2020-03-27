@@ -1,8 +1,6 @@
 # GeoQuery
 
-Easy to use C# API for 
-1. GeoHashing ✔️
-2. Proximity Searching [WIP]
+Easy to use C# API for GeoHashing ✔️
  
 [Gustavo Niemeyer’s geocoding system](https://en.wikipedia.org/wiki/Geohash)
 
