@@ -7,7 +7,7 @@ namespace GC
     {
         static void Main(string[] args)
         {
-            var s = GeoHash.Encode(26.83710, 80.92060, 6);
+            var s = GeoHash.Encode(26.83710, 80.92060, 12);
             var sp = GeoHash.Encode(new GeoPoint(26.83710, 80.92060), 6);
 
             var d = GeoHash.Decode(s);
