@@ -251,7 +251,7 @@ namespace GeoQuery
         /// <summary>
         /// Get hash table containg the cell-sizes with precision as key from 1-12
         /// </summary>
-        public static readonly Dictionary<int, CellSize> BoxSizeTable = new Dictionary<int, CellSize>()
+        public static Dictionary<int, CellSize> BoxSizeTable { get; } = new Dictionary<int, CellSize>()
         {
                    { 1, new CellSize(5000000, 5000000) },
                    { 2, new CellSize(1250000, 625000)},
@@ -303,10 +303,10 @@ namespace GeoQuery
     }
     public enum Direction
     {
-        East= 'e',
-        West= 'w',
-        North= 'n',
-        South= 's'
+        East,
+        West,
+        North,
+        South
     }
     public struct Neighbour
     {
