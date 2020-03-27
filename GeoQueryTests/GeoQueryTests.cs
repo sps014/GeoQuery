@@ -1,3 +1,8 @@
+/*
+ * All Test Cases are match result is matched result of
+ * http://www.movable-type.co.uk/scripts/geohash.html 
+ */
+
 using System;
 using Xunit;
 using GeoQuery;
@@ -12,6 +17,7 @@ namespace GeoQueryTests
             string actual8 = "eusftqx9";
             string calculated8 = GeoHash.Encode(25.78792, -4.32913, 8);
             Assert.Equal(actual8, calculated8);
+            Assert.Equal("efkbt6rx", GeoHash.Encode(new GeoPoint(12.7578, -4.32913),8));
         }
         [Fact]
         public void DecodeFromCoords()
