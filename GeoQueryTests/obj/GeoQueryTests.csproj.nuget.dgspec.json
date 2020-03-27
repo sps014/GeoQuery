@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQuery\\GeoQuery.csproj": {}
+    "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQuery\\GeoQuery.csproj": {
+    "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQuery\\GeoQuery.csproj",
-        "projectName": "GC",
-        "projectPath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQuery\\GeoQuery.csproj",
+        "projectUniqueName": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj",
+        "projectName": "GeoQueryTests",
+        "projectPath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj",
         "packagesPath": "C:\\Users\\shive\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQuery\\obj\\",
+        "outputPath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -22,14 +22,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -40,7 +40,15 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -51,11 +59,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300-preview-015048\\RuntimeIdentifierGraph.json"
         }
       }

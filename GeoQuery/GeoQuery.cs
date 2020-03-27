@@ -273,6 +273,7 @@ namespace GeoQuery
     {
         public double Width { get; }
         public double Height { get; }
+        public double Diagonal => Math.Sqrt(Width * Width + Height * Height);
         public CellSize(double w,double h)
         {
             Width = w;

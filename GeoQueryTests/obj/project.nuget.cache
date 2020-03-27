@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "SHVes6LdIknU1o949J8Ov9xhe2lMFxebZzEjNTtPAKHG59zMHz9VbTuSVietVE2Jobf0MJjlG94hq3sikGhFqQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shive\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\shive\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
