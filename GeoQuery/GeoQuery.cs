@@ -271,8 +271,17 @@ namespace GeoQuery
 
     public struct CellSize
     {
+        /// <summary>
+        /// Width of the GeoCell
+        /// </summary>
         public double Width { get; }
+        /// <summary>
+        /// Height of the GeoCell
+        /// </summary>
         public double Height { get; }
+        /// <summary>
+        /// Pathagorean Diagonal of the GeoCell
+        /// </summary>
         public double Diagonal => Math.Sqrt(Width * Width + Height * Height);
         public CellSize(double w,double h)
         {
