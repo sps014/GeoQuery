@@ -6,6 +6,10 @@ The algorithm is based on [Gustavo Niemeyer’s geocoding system](https://en.wik
 
 #### Usage
 ```C#
+
+            using GeoQuery;
+            //import lib namespace
+
             var s = GeoHash.Encode(26.83710, 80.92060, 12);
             ///eg output="tuxmgj12sdg1
             var sp = GeoHash.Encode(new GeoPoint(26.83710, 80.92060), 6);
