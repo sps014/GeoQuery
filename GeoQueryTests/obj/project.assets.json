@@ -1652,14 +1652,14 @@
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
       },
-      "GC/1.0.0": {
+      "GeoQuery/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "compile": {
-          "bin/placeholder/GC.dll": {}
+          "bin/placeholder/GeoQuery.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GC.dll": {}
+          "bin/placeholder/GeoQuery.dll": {}
         }
       }
     }
@@ -5623,7 +5623,7 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "GC/1.0.0": {
+    "GeoQuery/1.0.0": {
       "type": "project",
       "path": "../GeoQuery/GeoQuery.csproj",
       "msbuildProject": "../GeoQuery/GeoQuery.csproj"
@@ -5631,7 +5631,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "GC >= 1.0.0",
+      "GeoQuery >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.5.0",
       "coverlet.collector >= 1.2.0",
       "xunit >= 2.4.1",
