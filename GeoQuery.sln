@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29827.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoQuery", "GeoQuery\GeoQuery.csproj", "{0222B2AF-BF4A-4731-B8EE-A2697429A8FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoQueryTests", "GeoQueryTests\GeoQueryTests.csproj", "{DB0983B4-1043-4864-AD97-0F0747CB2723}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoQueryTests", "GeoQueryTests\GeoQueryTests.csproj", "{24019BD7-31EB-4818-928C-5445B445D059}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{0222B2AF-BF4A-4731-B8EE-A2697429A8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0222B2AF-BF4A-4731-B8EE-A2697429A8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0222B2AF-BF4A-4731-B8EE-A2697429A8FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB0983B4-1043-4864-AD97-0F0747CB2723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB0983B4-1043-4864-AD97-0F0747CB2723}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB0983B4-1043-4864-AD97-0F0747CB2723}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB0983B4-1043-4864-AD97-0F0747CB2723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24019BD7-31EB-4818-928C-5445B445D059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24019BD7-31EB-4818-928C-5445B445D059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24019BD7-31EB-4818-928C-5445B445D059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24019BD7-31EB-4818-928C-5445B445D059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
