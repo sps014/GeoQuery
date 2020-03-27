@@ -48,7 +48,15 @@ namespace GeoQueryTests
              */
 
             var bounds = GeoHash.Neighbours("efkbt6rx");
-            Assert.Equal(GeoHash.)
+            Assert.Equal("efkbt6x8", bounds.North);
+            Assert.Equal("efkbt6rw", bounds.South);
+            Assert.Equal("efkbt6rr", bounds.West);
+            Assert.Equal("efkbt6rz", bounds.East);
+            Assert.Equal("efkbt6ry", bounds.SouthEast);
+            Assert.Equal("efkbt6xb", bounds.NorthEast);
+            Assert.Equal("efkbt6rq", bounds.SouthWest);
+            Assert.Equal("efkbt6x2", bounds.NorthWest);
+
         }
 
     }
