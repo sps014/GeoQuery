@@ -53,7 +53,7 @@ namespace GeoQueryTests
                efkbt6rq	efkbt6rw	efkbt6ry
              */
 
-            var bounds = GeoHash.Neighbours("efkbt6rx");
+            var bounds = GeoHash.GetNeighbours("efkbt6rx");
             Assert.Equal("efkbt6x8", bounds.North);
             Assert.Equal("efkbt6rw", bounds.South);
             Assert.Equal("efkbt6rr", bounds.West);
