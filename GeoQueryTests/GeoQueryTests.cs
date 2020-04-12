@@ -59,7 +59,7 @@ namespace GeoQueryTests
             Assert.Equal("efkbt6rr", bounds.West);
             Assert.Equal("efkbt6rz", bounds.East);
             Assert.Equal("efkbt6ry", bounds.Southeast);
-            Assert.Equal("efkbt6xb", bounds.NorthEast);
+            Assert.Equal("efkbt6xb", bounds.Northeast);
             Assert.Equal("efkbt6rq", bounds.Southwest);
             Assert.Equal("efkbt6x2", bounds.Northwest);
 
