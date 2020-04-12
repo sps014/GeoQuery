@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GeoQuery
 {
-    class ProximityHash
+    public static class ProximityHash
     {
     }
 }
