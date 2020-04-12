@@ -38,7 +38,7 @@ namespace GeoQueryTests
 
              */
 
-            Assert.Equal("eusftqxd", GeoHash.Adjacent("eusftqx9", Direction.North));
+            Assert.Equal("eusftqxd", GeoHash.GetAdjacent("eusftqx9", CardinalDirection.North));
             Assert.Equal("eusftqx8", GeoHash.Adjacent("eusftqx9", Direction.South));
             Assert.Equal("eusftqxc", GeoHash.Adjacent("eusftqx9", Direction.East));
             Assert.Equal("eusftqx3", GeoHash.Adjacent("eusftqx9", Direction.West));
