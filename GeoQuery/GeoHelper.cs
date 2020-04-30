@@ -4,9 +4,9 @@ using System.Text;
 
 namespace GeoQuery
 {
-    public class KDTree
+    public class GeoHelper
     {
-        private static double Distance(GeoPoint point1,GeoPoint point2)
+        public static double Distance(GeoPoint point1, GeoPoint point2)
         {
             if ((point1.Latitude == point2.Latitude) && (point1.Longitude == point2.Longitude))
             {
@@ -16,7 +16,7 @@ namespace GeoQuery
             {
                 double theta = point1.Longitude - point2.Longitude;
                 double dist = Math.Sin(Deg2Rad(point1.Latitude)) * Math.Sin(Deg2Rad(point2.Latitude)) +
-                              Math.Cos(Deg2Rad(point1.Latitude)) * Math.Cos(Deg2Rad(point1.Latitude)) * 
+                              Math.Cos(Deg2Rad(point1.Latitude)) * Math.Cos(Deg2Rad(point1.Latitude)) *
                               Math.Cos(Deg2Rad(theta));
 
                 dist = Math.Acos(dist);
@@ -28,14 +28,13 @@ namespace GeoQuery
             }
         }
 
-        private static double Deg2Rad(double deg)
+        public static double Deg2Rad(double deg)
         {
             return (deg * Math.PI / 180.0);
         }
-        private static double Rad2Deg(double rad)
+        public static double Rad2Deg(double rad)
         {
             return (rad / Math.PI * 180.0);
         }
-
     }
 }
