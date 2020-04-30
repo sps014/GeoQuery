@@ -22,7 +22,10 @@ namespace GeoQuery
 
             int axis = depth % K;
 
-            List<GeoPoint> sortedPoint=points.Sort()
+            List<GeoPoint> sortedPoint = points.Sort(delegate(GeoPoint a, GeoPoint b)
+              {
+                  return GeoHelper.Distance(a, b);
+              });
         }
     }
 }
