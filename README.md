@@ -19,14 +19,14 @@ The algorithm is based on [Gustavo Niemeyer’s geocoding system](https://en.wik
             //d.Latitude=26.8371
             //d.Longitude=80.92060
             
-            var n1 = GeoHash.Adjacent(s,Direction.North);
+            var n1 = GeoHash.GetAdjacent(s,Direction.North);
             ///eg output="tuxmgl
-            var n4 = GeoHash.Adjacent(s, Direction.East);
+            var n4 = GeoHash.GetAdjacent(s, Direction.East);
             ///eg output="tuxmgg and so on for rest two
-            var n2 = GeoHash.Adjacent(s, Direction.South);
-            var n3 = GeoHash.Adjacent(s, Direction.West);
+            var n2 = GeoHash.GetAdjacent(s, Direction.South);
+            var n3 = GeoHash.GetAdjacent(s, Direction.West);
             
-            var ss= GeoHash.Neighbours(s);
+            var ss= GeoHash.GetNeighbours(s);
             //ss.North=tuxmgl
             //ss.SouthEast=tuxmg1
             and so on
