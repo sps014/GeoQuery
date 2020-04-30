@@ -4,37 +4,33 @@ using System.Text;
 
 namespace GeoQuery
 {
-    public class GeoHelper
+    public static class GeoHelper
     {
+        private static double ToRadians(double angleIn10thofaDegree)
+        {
+            return (angleIn10thofaDegree * Math.PI) / 180;
+        }
         public static double Distance(GeoPoint point1, GeoPoint point2)
         {
-            if ((point1.Latitude == point2.Latitude) && (point1.Longitude == point2.Longitude))
-            {
-                return 0;
-            }
-            else
-            {
-                double theta = point1.Longitude - point2.Longitude;
-                double dist = Math.Sin(Deg2Rad(point1.Latitude)) * Math.Sin(Deg2Rad(point2.Latitude)) +
-                              Math.Cos(Deg2Rad(point1.Latitude)) * Math.Cos(Deg2Rad(point1.Latitude)) *
-                              Math.Cos(Deg2Rad(theta));
+            var lon1 = ToRadians(point1.Longitude);
+            var lon2 = ToRadians(point2.Longitude);
+            var lat1 = ToRadians(point1.Latitude);
+            var lat2 = ToRadians(point2.Latitude);
 
-                dist = Math.Acos(dist);
-                dist = Rad2Deg(dist);
-                dist = dist * 60 * 1.1515;
-                dist = dist * 1.609344;
+            // Haversine formula  
+            double dlon = lon2 - lon1;
+            double dlat = lat2 - lat1;
+            double a = Math.Pow(Math.Sin(dlat / 2), 2) +
+                       Math.Cos(lat1) * Math.Cos(lat2) *
+                       Math.Pow(Math.Sin(dlon / 2), 2);
 
-                return (dist);
-            }
+            double c = 2 * Math.Asin(Math.Sqrt(a));
+
+            double r = 6371;
+
+            return (c * r);
         }
 
-        public static double Deg2Rad(double deg)
-        {
-            return (deg * Math.PI / 180.0);
-        }
-        public static double Rad2Deg(double rad)
-        {
-            return (rad / Math.PI * 180.0);
-        }
     }
+
 }
