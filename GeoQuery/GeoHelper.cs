@@ -17,7 +17,7 @@ namespace GeoQuery
             var lat1 = ToRadians(point1.Latitude);
             var lat2 = ToRadians(point2.Latitude);
 
-            // Haversine formula  
+            // Haversine formula here 
             double dlon = lon2 - lon1;
             double dlat = lat2 - lat1;
             double a = Math.Pow(Math.Sin(dlat / 2), 2) +
