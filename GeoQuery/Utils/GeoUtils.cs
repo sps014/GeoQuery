@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GeoQuery
 {
-    public static class GeoHelper
+    public static class GeoUtils
     {
         private static double ToRadians(double angleIn10thofaDegree)
         {

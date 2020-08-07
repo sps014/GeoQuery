@@ -68,7 +68,7 @@ namespace GeoQueryTests
         [Fact]
         public void Dist()
         {
-            var dist = GeoHelper.Distance(new GeoPoint(12, 11),new GeoPoint( 11, 12));
+            var dist = GeoUtils.Distance(new GeoPoint(12, 11),new GeoPoint( 11, 12));
             Assert.Equal("155.68179481457878", dist.ToString());
         }
 
