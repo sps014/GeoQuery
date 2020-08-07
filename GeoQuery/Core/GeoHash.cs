@@ -10,6 +10,66 @@ namespace GeoQuery
     {
         internal const string base32 = "0123456789bcdefghjkmnpqrstuvwxyz"; // (geohash-specific) Base32 map
 
+        static readonly Dictionary<CardinalDirection, string[]> neighbour = new Dictionary<CardinalDirection, string[]>()
+            {
+                {
+                    CardinalDirection.North, new string[]
+                    {
+                        "p0r21436x8zb9dcf5h7kjnmqesgutwvy",
+                        "bc01fg45238967deuvhjyznpkmstqrwx"
+                    }
+                },
+                {
+                    CardinalDirection.South, new string[]
+                    {
+                        "14365h7k9dcfesgujnmqp0r2twvyx8zb",
+                        "238967debc01fg45kmstqrwxuvhjyznp"
+                    }
+                },
+                {
+                     CardinalDirection.East, new string[]
+                     {
+                         "bc01fg45238967deuvhjyznpkmstqrwx",
+                         "p0r21436x8zb9dcf5h7kjnmqesgutwvy"
+                     }
+                },
+                {
+                     CardinalDirection.West, new string[]
+                     {
+                         "238967debc01fg45kmstqrwxuvhjyznp",
+                         "14365h7k9dcfesgujnmqp0r2twvyx8zb"
+                     }
+                }
+            };
+
+        static readonly Dictionary<CardinalDirection, string[]> border = new Dictionary<CardinalDirection, string[]>()
+            {
+                {
+                    CardinalDirection.North, new string[]
+                    {
+                        "prxz", "bcfguvyz"
+                    }
+                },
+                {
+                    CardinalDirection.South, new string[]
+                    {
+                        "028b", "0145hjnp"
+                    }
+                },
+                {
+                     CardinalDirection.East, new string[]
+                     {
+                         "bcfguvyz", "prxz"
+                     }
+                },
+                {
+                     CardinalDirection.West, new string[]
+                     {
+                         "0145hjnp", "028b"
+                     }
+                }
+            };
+
         /// <summary>
         /// Encode given latitude and longitude to corresponding GeoHash
         /// </summary>
@@ -165,67 +225,7 @@ namespace GeoQuery
             }
 
             return new GeoHashBound(new GeoPoint(latMin, lonMin), new GeoPoint(latMax, lonMax));
-        }
-
-        static Dictionary<CardinalDirection, string[]> neighbour = new Dictionary<CardinalDirection, string[]>()
-            {
-                {
-                    CardinalDirection.North, new string[]
-                    {
-                        "p0r21436x8zb9dcf5h7kjnmqesgutwvy",
-                        "bc01fg45238967deuvhjyznpkmstqrwx"
-                    }
-                },
-                {
-                    CardinalDirection.South, new string[]
-                    {
-                        "14365h7k9dcfesgujnmqp0r2twvyx8zb",
-                        "238967debc01fg45kmstqrwxuvhjyznp"
-                    }
-                },
-                {
-                     CardinalDirection.East, new string[]
-                     {
-                         "bc01fg45238967deuvhjyznpkmstqrwx",
-                         "p0r21436x8zb9dcf5h7kjnmqesgutwvy"
-                     }
-                },
-                {
-                     CardinalDirection.West, new string[]
-                     {
-                         "238967debc01fg45kmstqrwxuvhjyznp",
-                         "14365h7k9dcfesgujnmqp0r2twvyx8zb"
-                     }
-                }
-            };
-
-        static Dictionary<CardinalDirection, string[]> border = new Dictionary<CardinalDirection, string[]>()
-            {
-                {
-                    CardinalDirection.North, new string[]
-                    {
-                        "prxz", "bcfguvyz"
-                    }
-                },
-                {
-                    CardinalDirection.South, new string[]
-                    {
-                        "028b", "0145hjnp"
-                    }
-                },
-                {
-                     CardinalDirection.East, new string[]
-                     {
-                         "bcfguvyz", "prxz"
-                     }
-                },
-                {
-                     CardinalDirection.West, new string[]
-                     {
-                         "0145hjnp", "028b"
-                     }
-                }
-            };
+        } 
 
         /// <summary>
         /// Get the adjacent geohash
@@ -273,117 +273,5 @@ namespace GeoQuery
 
             return new Neighbour(n, s, e, w, ne, se, nw, sw);
         }
-    }
-
-    public readonly struct GeoPoint : IEquatable<GeoPoint>
-    {
-        public double Latitude { get; }
-
-        public double Longitude { get; }
-
-        public GeoPoint(double latitude, double longitude)
-        {
-            Latitude = latitude;
-            Longitude = longitude;
-        }
-
-        public override bool Equals(object obj) =>
-                    (obj is GeoPoint data) && Equals(data);
-
-        public bool Equals(GeoPoint other) =>
-            Latitude.Equals(other.Latitude) && Longitude.Equals(other.Longitude);
-
-        public override int GetHashCode() =>
-            Latitude.GetHashCode() ^ Longitude.GetHashCode();
-
-        public static bool operator ==(GeoPoint left, GeoPoint right) =>
-            left.Equals(right);
-
-        public static bool operator !=(GeoPoint left, GeoPoint right) =>
-            !left.Equals(right);
-    }
-
-    public readonly struct GeoHashBound : IEquatable<GeoHashBound>
-    {
-        public GeoPoint Southwest { get; }
-
-        public GeoPoint Northeast { get; }
-
-        public GeoHashBound(GeoPoint southWest, GeoPoint northEast)
-        {
-            Southwest = southWest;
-            Northeast = northEast;
-        }
-
-        public override bool Equals(object obj) =>
-                    (obj is GeoHashBound data) && Equals(data);
-
-        public bool Equals(GeoHashBound other) =>
-            Southwest.Equals(other.Southwest) && Northeast.Equals(other.Northeast);
-
-        public override int GetHashCode() =>
-            Southwest.GetHashCode() ^ Northeast.GetHashCode();
-
-        public static bool operator ==(GeoHashBound left, GeoHashBound right) =>
-            left.Equals(right);
-
-        public static bool operator !=(GeoHashBound left, GeoHashBound right) =>
-            !left.Equals(right);
-    }
-
-    public enum CardinalDirection
-    {
-        East,
-        West,
-        North,
-        South
-    }
-
-    public readonly struct Neighbour : IEquatable<Neighbour>
-    {
-        public string North { get; }
-
-        public string South { get; }
-
-        public string East { get; }
-
-        public string West { get; }
-
-        public string Northeast { get; }
-
-        public string Southeast { get; }
-
-        public string Northwest { get; }
-
-        public string Southwest { get; }
-
-        public Neighbour(string n, string s, string e, string w, string ne, string se, string nw, string sw)
-        {
-            North = n;
-            South = s;
-            East = e;
-            West = w;
-            Northeast = ne;
-            Southeast = se;
-            Northwest = nw;
-            Southwest = sw;
-        }
-
-        public override bool Equals(object obj) =>
-               (obj is Neighbour data) && Equals(data);
-
-        public bool Equals(Neighbour other) =>
-            (South ?? string.Empty).Equals(other.South) && (North ?? string.Empty).Equals(other.North)
-            && (East ?? string.Empty).Equals(other.East) && (West ?? string.Empty).Equals(other.West);
-
-        public override int GetHashCode() =>
-            (West ?? string.Empty).GetHashCode() ^ (East ?? string.Empty).GetHashCode()
-            + (North ?? string.Empty).GetHashCode() ^ (South ?? string.Empty).GetHashCode();
-
-        public static bool operator ==(Neighbour left, Neighbour right) =>
-            left.Equals(right);
-
-        public static bool operator !=(Neighbour left, Neighbour right) =>
-            !left.Equals(right);
     }
 }
