@@ -6,6 +6,7 @@
 using System;
 using Xunit;
 using GeoQuery;
+using System.Linq;
 
 namespace GeoQueryTests
 {
@@ -17,14 +18,14 @@ namespace GeoQueryTests
             string actual8 = "eusftqx9";
             string calculated8 = GeoHash.Encode(25.78792, -4.32913, 8);
             Assert.Equal(actual8, calculated8);
-            Assert.Equal("efkbt6rx", GeoHash.Encode(new GeoPoint(12.7578, -4.32913),8));
+            Assert.Equal("efkbt6rx", GeoHash.Encode(new GeoPoint(12.7578, -4.32913), 8));
         }
         [Fact]
         public void DecodeFromCoords()
         {
-            double lat_actual5= 25.787,long_actual5= -4.3291;
+            double lat_actual5 = 25.787, long_actual5 = -4.3291;
             var calculated8 = GeoHash.Decode("eusftqx9");
-            Assert.Equal(calculated8.Latitude.ToString().Substring(0,6),lat_actual5.ToString());
+            Assert.Equal(calculated8.Latitude.ToString().Substring(0, 6), lat_actual5.ToString());
             Assert.Equal(calculated8.Longitude.ToString().Substring(0, 7), long_actual5.ToString());
         }
         [Fact]
@@ -68,9 +69,49 @@ namespace GeoQueryTests
         [Fact]
         public void Dist()
         {
-            var dist = GeoUtils.Distance(new GeoPoint(12, 11),new GeoPoint( 11, 12));
+            var dist = GeoUtils.Distance(new GeoPoint(12, 11), new GeoPoint(11, 12));
             Assert.Equal("155.68179481457878", dist.ToString());
         }
+        [Fact]
+        public void InCircle()
+        {
+            var res=GeoQuery.GeoQuery.InCircleCheck(12, 77, 12.1, 77, 100);
+            Assert.True(res);
+            res = GeoQuery.GeoQuery.InCircleCheck(12, 77, 23, 87, 100);
+            Assert.True(res);
+        }
+        [Fact]
+        public void Centroid()
+        {
+            var expected= (15.0, 15.0);
+            var res = GeoQuery.GeoQuery.GetCentroid(10, 10, 10, 10);
+            Assert.Equal(expected, res);
+        }
+        [Fact]
+        public void COnvertLatLong()
+        {
+            var expected = (12.008993216059187, 77.0091941298557);
+            var res = GeoQuery.GeoQuery.ConvertToLatLong(1000.0, 1000.0, 12.0, 77.0);
+            Assert.Equal(expected, res);
+        }
 
+        [Fact]
+        public void CreateGeoHash()
+        {
+            var expected = new string[] {
+                "tdnu20t9",
+                "tdnu20t8",
+                "tdnu20t3",
+                "tdnu20t2",
+                "tdnu20mz",
+                "tdnu20mx",
+                "tdnu20tc",
+                "tdnu20tb",
+                "tdnu20td",
+                "tdnu20t"
+            };
+            var output = GeoQuery.GeoQuery.CreateGeoHash(new GeoPoint(12.0, 77.0), 20.0, 8, false, 1, 12);
+            Assert.Equal(expected, output.ToArray());
+        }
     }
 }
