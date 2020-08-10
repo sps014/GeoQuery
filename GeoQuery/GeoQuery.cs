@@ -88,5 +88,9 @@ namespace GeoQuery
 
             return geoHashes;
         }
+        public static HashSet<string> GetNearbyHashes(GeoPoint point,double radius,int precision)
+        {
+            var mainHash = GeoHash.Encode(point, precision);
+        }
     }
 }
