@@ -93,18 +93,60 @@ namespace GeoQuery
         public static HashSet<string> GetNearbyHashes(GeoPoint point,double radius,int precision)
         {
             var mainHash = GeoHash.Encode(point, precision);
+            var hashes = new HashSet<string>();
+
+            CalculateBlockNeighbour(mainHash, radius, precision, 0, ref hashes);
+
+            return hashes;
 
         }
-        private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputPoints)
+        private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputHashes)
         {
-            var height=GeoBlockSize.BlockSize[precision].Height;
-            var width = GeoBlockSize.BlockSize[precision].Width;
+            if (totalDistance > radius)
+                return;
 
-            Parallel.For (0,Environment.ProcessorCount,(i)=>
+            var height = GeoBlockSize.BlockSize[precision].Height;
+            var width = GeoBlockSize.BlockSize[precision].Width;
+            var diagonal = MathF.Sqrt((float)((height * height) + (width * width)));
+
+            outputHashes.Add(hash);
+
+            var nbr = GeoHash.GetNeighbours(hash);
+
+            if(!outputHashes.Contains(nbr.East))
             {
-                
-            });
-            
+                CalculateBlockNeighbour(nbr.East, radius, precision, totalDistance +height, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.West))
+            {
+                CalculateBlockNeighbour(nbr.West, radius, precision, totalDistance + height, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.North))
+            {
+                CalculateBlockNeighbour(nbr.North, radius, precision, totalDistance + width, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.South))
+            {
+                CalculateBlockNeighbour(nbr.South, radius, precision, totalDistance + width, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.Northeast))
+            {
+                CalculateBlockNeighbour(nbr.Northeast, radius, precision, totalDistance + diagonal, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.Northwest))
+            {
+                CalculateBlockNeighbour(nbr.Northwest, radius, precision, totalDistance + diagonal, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.Southeast))
+            {
+                CalculateBlockNeighbour(nbr.Southeast, radius, precision, totalDistance + diagonal, ref outputHashes);
+            }
+            if (!outputHashes.Contains(nbr.Southwest))
+            {
+                CalculateBlockNeighbour(nbr.Southwest, radius, precision, totalDistance + diagonal, ref outputHashes);
+            }
+
+
         }
     }
 }
