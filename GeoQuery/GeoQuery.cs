@@ -123,7 +123,6 @@ namespace GeoQuery
             if (totalDistance > radius)
                 return;
 
-
             outputHashes.Add(hash);
 
             var nbr = GeoHash.GetNeighbours(hash);
@@ -160,8 +159,6 @@ namespace GeoQuery
             {
                 CalculateBlockNeighbour(nbr.Southwest, radius, precision, totalDistance + box.Diagonal, ref outputHashes, ref box);
             }
-
-
         }
     }
 }

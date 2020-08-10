@@ -17,7 +17,7 @@ namespace SampleApp
             //}
             //reader.Close();
 
-            var mosfet = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 8, 9);
+            var mosfet = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 30000, 8);
         }
     }
 }
