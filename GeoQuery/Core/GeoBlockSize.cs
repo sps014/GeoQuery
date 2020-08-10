@@ -10,7 +10,7 @@ namespace GeoQuery.Core
         /// <summary>
         /// Size Width Height In Meters
         /// </summary>
-        public static IReadOnlyDictionary<int, (double Width, double Height)> BlockSize = new Dictionary<int, (double Width, double Height)>
+        public static IReadOnlyDictionary<int, (double Width, double Height)> BlockSize { get; } = new Dictionary<int, (double Width, double Height)>
         {
             {1,(5000000,5000000) },
             {2,(1250000,625000) },

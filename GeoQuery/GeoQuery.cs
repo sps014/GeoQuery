@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GeoQuery.Core;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GeoQuery
 {
@@ -91,6 +93,18 @@ namespace GeoQuery
         public static HashSet<string> GetNearbyHashes(GeoPoint point,double radius,int precision)
         {
             var mainHash = GeoHash.Encode(point, precision);
+
+        }
+        private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputPoints)
+        {
+            var height=GeoBlockSize.BlockSize[precision].Height;
+            var width = GeoBlockSize.BlockSize[precision].Width;
+
+            Parallel.For (0,Environment.ProcessorCount,(i)=>
+            {
+                
+            });
+            
         }
     }
 }
