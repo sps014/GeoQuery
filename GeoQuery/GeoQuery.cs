@@ -95,19 +95,34 @@ namespace GeoQuery
             var mainHash = GeoHash.Encode(point, precision);
             var hashes = new HashSet<string>();
 
-            CalculateBlockNeighbour(mainHash, radius, precision, 0, ref hashes);
+            var height = GeoBlockSize.BlockSize[precision].Height;
+            var width = GeoBlockSize.BlockSize[precision].Width;
+            var diagonal = MathF.Sqrt((float)((height * height) + (width * width)));
+
+
+            var box = new GeoBoxProperty()
+            {
+                Diagonal = diagonal,
+                Width=width,
+                Height=height
+            };
+
+            CalculateBlockNeighbour(mainHash, radius, precision, 0, ref hashes,ref box);
 
             return hashes;
 
         }
-        private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputHashes)
+        internal struct GeoBoxProperty
+        {
+            public double Width { get; set; }
+            public double Height { get; set; }
+            public double Diagonal { get; set; }
+        }
+        private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputHashes,ref GeoBoxProperty box)
         {
             if (totalDistance > radius)
                 return;
 
-            var height = GeoBlockSize.BlockSize[precision].Height;
-            var width = GeoBlockSize.BlockSize[precision].Width;
-            var diagonal = MathF.Sqrt((float)((height * height) + (width * width)));
 
             outputHashes.Add(hash);
 
@@ -115,35 +130,35 @@ namespace GeoQuery
 
             if(!outputHashes.Contains(nbr.East))
             {
-                CalculateBlockNeighbour(nbr.East, radius, precision, totalDistance +height, ref outputHashes);
+                CalculateBlockNeighbour(nbr.East, radius, precision, totalDistance +box.Height, ref outputHashes,ref box);
             }
             if (!outputHashes.Contains(nbr.West))
             {
-                CalculateBlockNeighbour(nbr.West, radius, precision, totalDistance + height, ref outputHashes);
+                CalculateBlockNeighbour(nbr.West, radius, precision, totalDistance + box.Height, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.North))
             {
-                CalculateBlockNeighbour(nbr.North, radius, precision, totalDistance + width, ref outputHashes);
+                CalculateBlockNeighbour(nbr.North, radius, precision, totalDistance + box.Width, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.South))
             {
-                CalculateBlockNeighbour(nbr.South, radius, precision, totalDistance + width, ref outputHashes);
+                CalculateBlockNeighbour(nbr.South, radius, precision, totalDistance + box.Width, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.Northeast))
             {
-                CalculateBlockNeighbour(nbr.Northeast, radius, precision, totalDistance + diagonal, ref outputHashes);
+                CalculateBlockNeighbour(nbr.Northeast, radius, precision, totalDistance + box.Diagonal, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.Northwest))
             {
-                CalculateBlockNeighbour(nbr.Northwest, radius, precision, totalDistance + diagonal, ref outputHashes);
+                CalculateBlockNeighbour(nbr.Northwest, radius, precision, totalDistance + box.Diagonal, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.Southeast))
             {
-                CalculateBlockNeighbour(nbr.Southeast, radius, precision, totalDistance + diagonal, ref outputHashes);
+                CalculateBlockNeighbour(nbr.Southeast, radius, precision, totalDistance + box.Diagonal, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.Southwest))
             {
-                CalculateBlockNeighbour(nbr.Southwest, radius, precision, totalDistance + diagonal, ref outputHashes);
+                CalculateBlockNeighbour(nbr.Southwest, radius, precision, totalDistance + box.Diagonal, ref outputHashes, ref box);
             }
 
 
