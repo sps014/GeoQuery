@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SampleApp
 {
@@ -17,7 +18,9 @@ namespace SampleApp
             //}
             //reader.Close();
 
-            var mosfet = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 30000, 8);
+            var mosfet = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 100000, 7);
+            var t2 = GeoQuery.GeoQuery.CreateGeoHash(new GeoPoint(50, -50), 100000,7, true, 1, 7);
+            mosfet=GeoRaptor.Compress(mosfet, 1, 7).OrderBy(x=>x.Length).ToHashSet();
         }
     }
 }

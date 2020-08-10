@@ -120,28 +120,27 @@ namespace GeoQuery
         }
         private static void CalculateBlockNeighbour(string hash,double radius,int precision,double totalDistance,ref HashSet<string> outputHashes,ref GeoBoxProperty box)
         {
+            outputHashes.Add(hash);
+            var nbr = GeoHash.GetNeighbours(hash);
+         
             if (totalDistance > radius)
                 return;
 
-            outputHashes.Add(hash);
-
-            var nbr = GeoHash.GetNeighbours(hash);
-
             if(!outputHashes.Contains(nbr.East))
             {
-                CalculateBlockNeighbour(nbr.East, radius, precision, totalDistance +box.Height, ref outputHashes,ref box);
+                CalculateBlockNeighbour(nbr.East, radius, precision, totalDistance +box.Width, ref outputHashes,ref box);
             }
             if (!outputHashes.Contains(nbr.West))
             {
-                CalculateBlockNeighbour(nbr.West, radius, precision, totalDistance + box.Height, ref outputHashes, ref box);
+                CalculateBlockNeighbour(nbr.West, radius, precision, totalDistance + box.Width, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.North))
             {
-                CalculateBlockNeighbour(nbr.North, radius, precision, totalDistance + box.Width, ref outputHashes, ref box);
+                CalculateBlockNeighbour(nbr.North, radius, precision, totalDistance + box.Height, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.South))
             {
-                CalculateBlockNeighbour(nbr.South, radius, precision, totalDistance + box.Width, ref outputHashes, ref box);
+                CalculateBlockNeighbour(nbr.South, radius, precision, totalDistance + box.Height, ref outputHashes, ref box);
             }
             if (!outputHashes.Contains(nbr.Northeast))
             {
