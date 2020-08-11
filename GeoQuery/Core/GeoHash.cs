@@ -82,7 +82,7 @@ namespace GeoQuery
             var idx = 0; // index into base32 map
             var bit = 0; // each char holds 5 bits
             var evenBit = true;
-            var geohash = string.Empty;
+            var geohash =new StringBuilder(string.Empty);
 
             double latMin = -90, latMax = 90;
             double lonMin = -180, lonMax = 180;
@@ -124,13 +124,13 @@ namespace GeoQuery
                 if (++bit == 5)
                 {
                     // 5 bits gives us a character: append it and start over
-                    geohash += base32[idx];
+                    geohash.Append(base32[idx]);
                     bit = 0;
                     idx = 0;
                 }
             }
 
-            return geohash;
+            return geohash.ToString();
         }
 
         /// <summary>
