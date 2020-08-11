@@ -1,10 +1,13 @@
 # GeoQuery and Proximity Search
 
-Easy to use C# API for GeoHashing ✔️. 
 
-Easy to use C# API for Generating Geohash around a Location. ✔️.
+ ✔️ Easy to use C# API for GeoHashing.
 
-GeoHash Compression to get less query point. ✔️.
+ ✔️ Easy to use C# API for Generating Geohash around a Location.
+
+ ✔️ GeoHash Compression to get minmized query hashes.                 
+
+ ✔️ 6-10 times faster than it's python equivalent.               
 
 The algorithm is based on [Gustavo Niemeyer’s geocoding system](https://en.wikipedia.org/wiki/Geohash)
 
@@ -42,5 +45,6 @@ The algorithm is based on [Gustavo Niemeyer’s geocoding system](https://en.wik
            var hashes=HashQuery.GetNearbyHashes(new GeoPoint(50, -50), radius, 8,true);
 ```
 
-###### Thanks to [@chrisveness](https://github.com/chrisveness/) port of js-lat-long lib
+###### Thanks to [@chrisveness](https://github.com/chrisveness/)  port of js-lat-long lib
+###### Thanks to [@ashwin711](https://github.com/ashwin711/georaptor) port of georaptor (compression)
 
