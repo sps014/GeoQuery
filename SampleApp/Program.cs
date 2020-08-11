@@ -1,6 +1,7 @@
 ﻿using GeoQuery;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -17,10 +18,16 @@ namespace SampleApp
             //    set.Add(reader.ReadLine());
             //}
             //reader.Close();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            _ = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 40000, 8);
+            var v1 = stopwatch.ElapsedMilliseconds;
+            stopwatch.Restart();
+            _ = GeoQuery.GeoQuery.CreateGeoHash(new GeoPoint(50, -50), 40000, 8,false,1,8);
+            var v2 = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine("Time Taken by my version of algo:  " + v1+" ms");
+            Console.WriteLine("Time Taken by python counter part version of algo : " + v2+" ms");
 
-            var mosfet = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), 100000, 7);
-            var t2 = GeoQuery.GeoQuery.CreateGeoHash(new GeoPoint(50, -50), 100000,7, true, 1, 7);
-            mosfet=GeoRaptor.Compress(mosfet, 1, 7).OrderBy(x=>x.Length).ToHashSet();
         }
     }
 }
