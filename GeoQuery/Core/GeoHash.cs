@@ -86,13 +86,13 @@ namespace GeoQuery
 
             double latMin = -90, latMax = 90;
             double lonMin = -180, lonMax = 180;
-
+            double lonMid, latMid;
             while (geohash.Length < precision)
             {
                 if (evenBit)
                 {
                     // bisect E-W longitude
-                    var lonMid = (lonMin + lonMax) / 2;
+                    lonMid = (lonMin + lonMax) / 2;
                     if (lon >= lonMid)
                     {
                         idx = (idx * 2) + 1;
@@ -107,7 +107,7 @@ namespace GeoQuery
                 else
                 {
                     // bisect N-S latitude
-                    var latMid = (latMin + latMax) / 2.0;
+                    latMid = (latMin + latMax) / 2.0;
                     if (lat >= latMid)
                     {
                         idx = (idx * 2) + 1;

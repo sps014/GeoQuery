@@ -18,7 +18,7 @@ namespace SampleApp
             //    set.Add(reader.ReadLine());
             //}
             //reader.Close();
-            var radius = 5000;
+            var radius = 10000;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             _ = GeoQuery.GeoQuery.GetNearbyHashes(new GeoPoint(50, -50), radius, 8);

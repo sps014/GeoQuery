@@ -103,13 +103,13 @@ namespace GeoQuery
         {
             var hashes = new HashSet<string>();
 
-            Stack<(string Hash, double Distance)> StackFrame = new Stack<(string Hash, double Distance)>();
+            Stack<(ReadOnlyMemory<char> Hash, double Distance)> StackFrame = new Stack<(ReadOnlyMemory<char> Hash, double Distance)>();
 
             var height = GeoBlockSize.BlockSize[precision].Height;
             var width = GeoBlockSize.BlockSize[precision].Width;
             var diagonal = MathF.Sqrt((float)((height * height) + (width * width)));
 
-            StackFrame.Push((hash,0));
+            StackFrame.Push((hash.AsMemory(), 0));
 
             while(StackFrame.Count>0)
             {
@@ -118,27 +118,28 @@ namespace GeoQuery
                 if (curr.Distance > radius)
                     continue;
 
-                hashes.Add(curr.Hash);
+                hashes.Add(curr.Hash.ToString());
 
-                var nbr = GeoHash.GetNeighbours(curr.Hash);
+                var nbr = GeoHash.GetNeighbours(curr.Hash.ToString());
 
                 if (!hashes.Contains(nbr.East))
-                    StackFrame.Push((nbr.East, curr.Distance + width));
+                    StackFrame.Push((nbr.East.AsMemory(), curr.Distance + width));
                 if (!hashes.Contains(nbr.West))
-                    StackFrame.Push((nbr.West, curr.Distance + width));
+                    StackFrame.Push((nbr.West.AsMemory(), curr.Distance + width));
                 if (!hashes.Contains(nbr.North))
-                    StackFrame.Push((nbr.North, curr.Distance + height));
+                    StackFrame.Push((nbr.North.AsMemory(), curr.Distance + height));
                 if (!hashes.Contains(nbr.South))
-                    StackFrame.Push((nbr.South, curr.Distance + height));
+                    StackFrame.Push((nbr.South.AsMemory(), curr.Distance + height));
                 if (!hashes.Contains(nbr.Northeast))
-                    StackFrame.Push((nbr.Northeast, curr.Distance + diagonal));
+                    StackFrame.Push((nbr.Northeast.AsMemory(), curr.Distance + diagonal));
                 if (!hashes.Contains(nbr.Northwest))
-                    StackFrame.Push((nbr.Northwest, curr.Distance + diagonal));
+                    StackFrame.Push((nbr.Northwest.AsMemory(), curr.Distance + diagonal));
                 if (!hashes.Contains(nbr.Southeast))
-                    StackFrame.Push((nbr.Southeast, curr.Distance + diagonal));
+                    StackFrame.Push((nbr.Southeast.AsMemory(), curr.Distance + diagonal));
                 if (!hashes.Contains(nbr.Southwest))
-                    StackFrame.Push((nbr.Southwest, curr.Distance + diagonal));
-            }         
+                    StackFrame.Push((nbr.Southwest.AsMemory(), curr.Distance + diagonal));
+            }
+         
             return hashes;
         }
     }
