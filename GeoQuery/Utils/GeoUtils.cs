@@ -28,7 +28,7 @@ namespace GeoQuery
 
             double r = 6371;
 
-            return (c * r);
+            return (c * r)*1000.0;
         }
 
     }

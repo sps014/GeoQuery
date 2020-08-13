@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoQuery", "GeoQuery\GeoQue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoQueryTests", "GeoQueryTests\GeoQueryTests.csproj", "{24019BD7-31EB-4818-928C-5445B445D059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\SampleApp.csproj", "{4538AB35-4DEF-4427-A9CE-EC16B899C1C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{4538AB35-4DEF-4427-A9CE-EC16B899C1C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapTest", "MapTest\MapTest.csproj", "{46655D57-0088-4E5F-BDEE-BBDEA4E12A46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4538AB35-4DEF-4427-A9CE-EC16B899C1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4538AB35-4DEF-4427-A9CE-EC16B899C1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4538AB35-4DEF-4427-A9CE-EC16B899C1C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46655D57-0088-4E5F-BDEE-BBDEA4E12A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46655D57-0088-4E5F-BDEE-BBDEA4E12A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46655D57-0088-4E5F-BDEE-BBDEA4E12A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46655D57-0088-4E5F-BDEE-BBDEA4E12A46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
