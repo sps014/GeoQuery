@@ -1,4 +1,4 @@
-# GeoQuery and Proximity Search
+# GeoQuery and Nearby Search
 
 ![proximityhash_georaptor](https://user-images.githubusercontent.com/45932883/90155482-ff8e9500-dda8-11ea-9106-d7e7e1ba983d.png)
 
