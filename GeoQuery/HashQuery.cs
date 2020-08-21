@@ -102,10 +102,10 @@ namespace GeoQuery
         /// <param name="precision">geohash precision between 1-12</param>
         /// <param name="maxLevel">geohash precision between maximum geohash precision</param>
         /// <returns></returns>
-        public static HashSet<string> GetNearbyHashes(GeoPoint point, double radius, int precision, bool compress = false,int maxLevel=12)
+        public static HashSet<string> GetNearbyHashes(GeoPoint point, double radius, int precision, bool compress = false,int maxLevel=12,int minLevel=1)
         {
 
-            var hashes = CreateGeoHash(point, radius, precision,compress,1,maxLevel);
+            var hashes = CreateGeoHash(point, radius, precision,compress,minLevel,maxLevel);
             return hashes;
 
         }

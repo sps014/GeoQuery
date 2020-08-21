@@ -14,7 +14,7 @@ namespace SampleApp
             var radius = 5000;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var hashes = HashQuery.GetNearbyHashes(new GeoPoint(50, -50), radius, 8,false);
+            var hashes = HashQuery.GetNearbyHashes(new GeoPoint(50, -50), radius, 7,true);
 
             var v1 = stopwatch.ElapsedMilliseconds;
             stopwatch.Stop();

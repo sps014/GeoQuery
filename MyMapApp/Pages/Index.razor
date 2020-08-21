@@ -1,0 +1,27 @@
+﻿@page "/"
+@inject IJSRuntime Runtime
+
+<button class="btn btn-primary" @onclick="Clicked">Start</button>
+
+
+@code
+{ 
+    async void AddCircle(GeoQuery.GeoPoint point,int radius,string color="#f03",string color2="red")
+
+    {
+        await Runtime.InvokeVoidAsync("addCircle", point.Latitude, point.Longitude, radius, color, color2);
+    }
+
+    void Clicked()
+    {
+        GeoQuery.GeoPoint point = new GeoQuery.GeoPoint(10, -10);
+        AddCircle(point, 5000);
+        var pts = GeoQuery.HashQuery.GetNearbyHashes(point, 5000,7, true);
+        foreach (var pt in pts)
+        {
+            var points = GeoQuery.GeoHash.Decode(pt);
+            var dim = GeoQuery.Core.GeoBlockSize.BlockSize[pt.Length];
+            AddCircle(points, (int)dim.Width, "green", "green");
+        }
+    }
+}
