@@ -15,8 +15,8 @@
     void Clicked()
     {
         GeoQuery.GeoPoint point = new GeoQuery.GeoPoint(10, -10);
-        AddCircle(point, 5000);
-        var pts = GeoQuery.HashQuery.GetNearbyHashes(point, 5000,7, true);
+        AddCircle(point, 1000);
+        var pts = GeoQuery.HashQuery.GetNearbyHashes(point, 1000,8, true,12,1);
         foreach (var pt in pts)
         {
             var points = GeoQuery.GeoHash.Decode(pt);
