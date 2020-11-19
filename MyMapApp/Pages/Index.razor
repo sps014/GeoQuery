@@ -1,27 +1,35 @@
 ﻿@page "/"
 @inject IJSRuntime Runtime
 
-<button class="btn btn-primary" @onclick="Clicked">Start</button>
-
+<button class="btn btn-primary" @onclick="Clicked">Generate</button>
+<input type="number" class="form-control" placeholder="Latitude" @bind-value="latitude"/>
+<input type="number" class="form-control" placeholder="Longitude" @bind-value="longitude" />
 
 @code
-{ 
-    async void AddCircle(GeoQuery.GeoPoint point,int radius,string color="#f03",string color2="red")
+{
+    double latitude = 10;
+    double longitude = -10;
+    private IJSInProcessRuntime jSInProcess;
 
+    protected override void OnInitialized()
     {
-        await Runtime.InvokeVoidAsync("addCircle", point.Latitude, point.Longitude, radius, color, color2);
+        jSInProcess = (IJSInProcessRuntime)Runtime;
+    }
+     void AddCircle(GeoQuery.GeoPoint point, int radius, string color = "green", string color2 = "green")
+    {
+        jSInProcess.InvokeVoid("addCircle", point.Latitude, point.Longitude, radius, color, color2);
     }
 
     void Clicked()
     {
-        GeoQuery.GeoPoint point = new GeoQuery.GeoPoint(10, -10);
-        AddCircle(point, 1000);
-        var pts = GeoQuery.HashQuery.GetNearbyHashes(point, 1000,8, true,12,1);
+        GeoQuery.GeoPoint point = new GeoQuery.GeoPoint(latitude, longitude);
+        AddCircle(point, 1000,"red","red");
+        var pts = GeoQuery.HashQuery.GetNearbyHashes(point, 1000, 8, true, 8, 1);
         foreach (var pt in pts)
         {
             var points = GeoQuery.GeoHash.Decode(pt);
             var dim = GeoQuery.Core.GeoBlockSize.BlockSize[pt.Length];
-            AddCircle(points, (int)dim.Width, "green", "green");
+            AddCircle(points, (int)dim.Width);
         }
     }
 }
