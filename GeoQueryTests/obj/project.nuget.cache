@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "77NQtSLNbNlthhICJtp2ebWoGI2pWOZUjs1ACZx0dnUXQ3vIB80iuU/aZQVIUBqEPxs4XhjTBj45v0pP1TblBQ==",
+  "dgSpecHash": "F1ruZoP5DoZuzlnmsslHirAMxx/A7ku+EKqaHRvF6m0DEJg5RRfHzmX/4hcw6hLgeSyLcPw3Cq7x06hDk/rBNw==",
   "success": true,
   "projectFilePath": "C:\\Users\\shive\\Desktop\\Test\\GeoQuery\\GeoQueryTests\\GeoQueryTests.csproj",
   "expectedPackageFiles": [
@@ -94,7 +94,8 @@
     "C:\\Users\\shive\\.nuget\\packages\\xunit.core\\2.4.1\\xunit.core.2.4.1.nupkg.sha512",
     "C:\\Users\\shive\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512",
     "C:\\Users\\shive\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
-    "C:\\Users\\shive\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.1\\xunit.runner.visualstudio.2.4.1.nupkg.sha512"
+    "C:\\Users\\shive\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.1\\xunit.runner.visualstudio.2.4.1.nupkg.sha512",
+    "C:\\Users\\shive\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
   ],
   "logs": []
 }
